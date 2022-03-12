@@ -1,7 +1,7 @@
 // https://developer.chrome.com/extensions/manifest
 {
     // Required
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "My Extension",
     "version": "versionString",
 
@@ -19,8 +19,6 @@
     "author": "",
     "automation": "",
     "background": {
-        // Recommended
-        "persistent": false,
         // Optional
         "service_worker": ""
     },
@@ -35,7 +33,6 @@
     "commands": {},
     "content_capabilities": "",
     "content_scripts": [{}],
-    "content_security_policy": "policyString",
     "converted_from_user_script": "",
     "current_locale": "",
     "declarative_net_request": "",

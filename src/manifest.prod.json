@@ -2,33 +2,41 @@
     "name": "awesome chrome extension boilerplate",
     "version": "1.0",
     "description": "made by awesome-chrome-extension-boilerplate",
-    "manifest_version": 2,
+    "manifest_version": 3,
     "minimum_chrome_version": "80",
     "permissions": [],
-    "web_accessible_resources": ["icons/*", "images/*", "fonts/*"],
+    "web_accessible_resources": [
+        {
+            "resources": ["icons/*"],
+            "matches": ["<all_urls>"]
+        },
+        {
+            "resources": ["images/*"],
+            "matches": ["<all_urls>"]
+        },
+        {
+            "resources": ["fonts/*"],
+            "matches": ["<all_urls>"]
+        }
+    ],
     "background": {
-        "scripts": ["js/background.js"],
+        "service_worker": "js/background.js",
         "persistent": true
     },
     "content_scripts": [
         {
             "matches": ["https://github.com/*"],
             "css": ["css/all.css"],
-            "js": ["js/vendor.js", "js/all.js"]
+            "js": ["js/vendor.js", "js/all.js"],
+            "run_at": "document_end"
         }
     ],
-    "browser_action": {
-        "default_popup": "popup.html",
-        "default_icon": {
-            "16": "icons/extension-icon-x16.png",
-            "32": "icons/extension-icon-x32.png",
-            "48": "icons/extension-icon-x48.png",
-            "128": "icons/extension-icon-x128.png"
-        }
-    },
     "options_ui": {
         "page": "options.html",
         "open_in_tab": true
+    },
+    "action": {
+        "default_popup": "popup.html"
     },
     "icons": {
         "16": "icons/extension-icon-x16.png",

@@ -8,7 +8,7 @@ import { HRM_PATH } from '../utils/constants';
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default function (compiler: Compiler) {
     const publicPath = devConfig.output!.publicPath! as string;
-    const devMiddlewareOptions: webpackDevMiddleware.Options = {
+    const devMiddlewareOptions: any = {
         publicPath,
         stats: 'minimal',
         writeToDisk: true,

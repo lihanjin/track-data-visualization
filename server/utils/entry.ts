@@ -1,9 +1,8 @@
+import execa from 'execa';
 import fs from 'fs';
 import { resolve } from 'path';
 
-import execa from 'execa';
-
-import { HOST, PORT, HRM_PATH, __DEV__, ENABLE_DEVTOOLS } from './constants';
+import { __DEV__, ENABLE_DEVTOOLS, HOST, HRM_PATH, PORT } from './constants';
 
 const src = resolve(__dirname, '../../src');
 const HMR_URL = encodeURIComponent(`http://${HOST}:${PORT}${HRM_PATH}`);
@@ -13,22 +12,26 @@ const HMRClientScript = `webpack-hot-middleware/client?path=${HMR_URL}&reload=tr
 const backgroundPath = resolve(src, './background/index.ts');
 const optionsPath = resolve(src, './options/index.tsx');
 const popupPath = resolve(src, './popup/index.tsx');
+const devtoolsPath = resolve(src, './devtools/index.tsx');
 
 const devEntry: Record<string, string[]> = {
     background: [HMRClientScript, backgroundPath],
     options: [HMRClientScript, optionsPath],
     popup: [HMRClientScript, popupPath],
+    devtools: [HMRClientScript, devtoolsPath],
 };
 const prodEntry: Record<string, string[]> = {
     background: [backgroundPath],
     options: [optionsPath],
-    popup: [popupPath],
+    devtools: [devtoolsPath],
 };
 const entry = __DEV__ ? devEntry : prodEntry;
 
 if (ENABLE_DEVTOOLS) {
     entry.options.unshift('react-devtools');
     entry.popup.unshift('react-devtools');
+    entry.devtools.unshift('react-devtools');
+
     execa.command('npx react-devtools').catch((error) => {
         console.error('Startup react-devtools occur error');
         error && console.error(error);

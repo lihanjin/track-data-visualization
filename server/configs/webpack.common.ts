@@ -76,6 +76,12 @@ const commonConfig: Configuration = {
             template: resolve(PROJECT_ROOT, 'public/options.html'),
         }),
         new HtmlWebpackPlugin({
+            chunks: ['devtools'],
+            filename: 'devtools.html',
+            title: 'devtools.html',
+            template: resolve(PROJECT_ROOT, 'public/devtools.html'),
+        }),
+        new HtmlWebpackPlugin({
             chunks: ['popup'],
             filename: 'popup.html',
             title: 'popup page',
